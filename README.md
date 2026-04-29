@@ -293,17 +293,6 @@ pytest tests/ -v -k "Gradient"
 
 ---
 
-## Citation
-
-```bibtex
-@inproceedings{psqft2025,
-  title     = {{PS-QFT}: Phase-Structured Quantum Fourier Features
-               with Programmable Kernels},
-  author    = {Anonymous},
-  booktitle = {Advances in Neural Information Processing Systems},
-  year      = {2025},
-}
-```
 
 ---
 
