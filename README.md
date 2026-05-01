@@ -60,12 +60,12 @@ x_batch = np.arange(16)
 C = enc.encode(x_batch)     # shape (16, N)
 P = op(C)                   # shape (16, N)
 
-## --- Kernel computation ---
+## Kernel computation
 from psqft import PSQFTKernel
 kernel = PSQFTKernel(op)
 K = kernel.gram_matrix(C)   # (16, 16) Gram matrix, PSD guaranteed
 
-## --- Avalanche evaluation ---
+## Avalanche evaluation
 from psqft import AvalancheEvaluator
 report = AvalancheEvaluator(op).evaluate(n_samples=1000)
 print(report)
@@ -92,7 +92,6 @@ op_optimal = PSQFT(N=N, beta=result.beta)
 
 ## Architecture
 
-```
 psqft/
 ├── core/
 │   ├── operator.py           ← PS-QFT operators (NumPy backend)
@@ -140,7 +139,6 @@ psqft/
         └── DensityEncoder      ← Amplitude → density matrix ρ = cc†
 ```
 
----
 
 ## Design Decisions
 
