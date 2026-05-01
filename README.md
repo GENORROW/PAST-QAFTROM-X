@@ -86,12 +86,12 @@ print(result)
 OptimResult(status=converged, n_iter=147, final_entropy=7.999 bits)
 
 op_optimal = PSQFT(N=N, beta=result.beta)
+
+
+
+## The Architecture
 ```
-
 ---
-
-## Architecture
-
 psqft/
 ├── core/
 │   ├── operator.py           ← PS-QFT operators (NumPy backend)
