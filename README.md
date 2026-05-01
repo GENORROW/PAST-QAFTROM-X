@@ -44,46 +44,46 @@ This gives **2N real degrees of freedom** — versus 0 for the standard QFT.
 
 ---
 
-# --- Basic usage ---
+## Basic usage
 N = 256
 beta = KeySchedule(N, mode="hash").derive(b"my_secret_key")
 op = PSQFT(N=N, beta=beta)
 
-# Encode an input and compute output probabilities
+## Encode an input and compute output probabilities
 enc = BitEncoder(N)
 c = enc.encode(42)          # |42⟩ computational basis state
 p = op(c)                   # output probability distribution, shape (N,)
 H = op.output_entropy(c)    # Shannon entropy in bits
 
-# Batched inputs
+## Batched inputs
 x_batch = np.arange(16)
 C = enc.encode(x_batch)     # shape (16, N)
 P = op(C)                   # shape (16, N)
 
-# --- Kernel computation ---
+## --- Kernel computation ---
 from psqft import PSQFTKernel
 kernel = PSQFTKernel(op)
 K = kernel.gram_matrix(C)   # (16, 16) Gram matrix, PSD guaranteed
 
-# --- Avalanche evaluation ---
+## --- Avalanche evaluation ---
 from psqft import AvalancheEvaluator
 report = AvalancheEvaluator(op).evaluate(n_samples=1000)
 print(report)
-# AvalancheReport(
-#   AC = 0.4998 ± 0.0031
-#   bias = 0.0002
-#   SAC score = 0.9375
-#   H(output) = 7.981 ± 0.012 bits
-#   KL(p||uniform) = 0.000312
-#   n_samples = 1000
-# )
+AvalancheReport(
+  AC = 0.4998 ± 0.0031
+  bias = 0.0002
+  SAC score = 0.9375
+  H(output) = 7.981 ± 0.012 bits
+  KL(p||uniform) = 0.000312
+  n_samples = 1000
+)
 
-# --- Entropy maximization ---
+## Entropy maximization
 from psqft.optim import EntropyAscent
 solver = EntropyAscent(N, lr=0.1, max_iter=200, lr_schedule="cosine")
 result = solver.solve(C, beta_init=beta)
 print(result)
-# OptimResult(status=converged, n_iter=147, final_entropy=7.999 bits)
+OptimResult(status=converged, n_iter=147, final_entropy=7.999 bits)
 
 op_optimal = PSQFT(N=N, beta=result.beta)
 ```
