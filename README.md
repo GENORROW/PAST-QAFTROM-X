@@ -91,7 +91,6 @@ op_optimal = PSQFT(N=N, beta=result.beta)
 
 ## The Architecture
 ```
----
 psqft/
 ├── core/
 │   ├── operator.py           ← PS-QFT operators (NumPy backend)
