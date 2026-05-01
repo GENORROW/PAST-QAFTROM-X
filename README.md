@@ -44,33 +44,6 @@ This gives **2N real degrees of freedom** — versus 0 for the standard QFT.
 
 ---
 
-## Installation
-
-```bash
-# Core (NumPy + SciPy only)
-pip install -e .
-
-# With PyTorch backend (GPU acceleration, autograd)
-pip install -e ".[torch]"
-
-# With development tools
-pip install -e ".[dev]"
-
-# With example dependencies
-pip install -e ".[examples]"
-```
-
-**Requirements:** Python ≥ 3.10, NumPy ≥ 1.24, SciPy ≥ 1.10
-
----
-
-## Quick Start
-
-```python
-import numpy as np
-from psqft import PSQFT, KeySchedule, AvalancheEvaluator
-from psqft.utils.encoding import BitEncoder
-
 # --- Basic usage ---
 N = 256
 beta = KeySchedule(N, mode="hash").derive(b"my_secret_key")
